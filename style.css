@@ -1,0 +1,27 @@
+html, body {
+    min-height: 100vh;
+    font-family: "Roboto", sans-serif;
+}
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+#newBook {
+    background-color: lightyellow;
+    color: #1f2a44;
+    font-family: "Roboto", sans-serif;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.formButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
