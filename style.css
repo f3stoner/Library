@@ -25,3 +25,14 @@ form {
     grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
+#bookCards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.book {
+    background-color: lightblue;
+    color: #1f2a44;
+
+}
