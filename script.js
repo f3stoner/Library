@@ -57,23 +57,28 @@ function renderLibrary() {
         const bookContent = document.createElement("div");
         bookContent.className = "bookContent";
         newBookDiv.append(bookContent);
-        bookContent.textContent = `By: ${book.author} Pages: ${book.pages} Read Status: ${book.read}`;
+        const authorDiv = document.createElement("div");
+        authorDiv.className = "author"
+        authorDiv.textContent = `By: ${book.author}`
+        bookContent.append(authorDiv)
+        const pagesDiv = document.createElement("div");
+        pagesDiv.className = "pages"
+        pagesDiv.textContent = `Pages: ${book.pages}`
+        bookContent.append(pagesDiv)
+        const statusDiv = document.createElement("div");
+        statusDiv.className = "readStatus"
+        statusDiv.textContent = `Read Status: ${book.read}`
+        bookContent.append(statusDiv)
         const bookActions = document.createElement("div");
         bookActions.className = "bookActions";
         newBookDiv.append(bookActions);
         const toggleBtn = document.createElement("button");
         toggleBtn.textContent = "Toggle Read Status";
         toggleBtn.className = "toggle";
-        toggleBtn.addEventListener("click", function () {
-            toggleRead(book.id);
-        })
         bookActions.append(toggleBtn);
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete Entry";
         deleteBtn.className = "delete";
-        deleteBtn.addEventListener("click", function(){
-            deleteEntry(book.id);
-        })
         bookActions.append(deleteBtn);
         bookCards.append(newBookDiv);
     }
@@ -85,8 +90,22 @@ function clearLibrary() {
     }
 }
 
-function toggleRead(bookId) {
+Book.prototype.toggleRead = function () {
+    if (this.read === "Read"){
+        this.read = "Unread";
+    } else if (this.read === "Unread") {
+        this.read = "Read";
+    }
+}
 
+function toggleRead(bookId) {
+    for (const book of myLibrary) {
+        if (book.id === bookId) {
+            book.toggleRead();
+            break;
+        }
+    }
+    renderLibrary();
 }
 
 function deleteEntry(bookId) {
@@ -95,9 +114,26 @@ function deleteEntry(bookId) {
     if (book.id !== bookId){
         newLibrary.push(book);
     }
-    myLibrary = newLibrary;
    }
+   myLibrary = newLibrary;
    renderLibrary();
 }
 
+bookCards.addEventListener("click", (event) => {
+    const bookElement = event.target.closest(".book");
+    if (!bookElement) {
+        return;
+    } 
+    const bookId = bookElement.dataset.id;
+    if (event.target.closest(".delete")) {
+        deleteEntry(bookId);
+    } else if (event.target.closest(".toggle")) {
+        toggleRead(bookId);
+    }
+})
 
+myLibrary.push(new Book("The Hobbit", "Tolkien", 310, "Unread"));
+myLibrary.push(new Book("Dune", "Frank Herbert", 412, "Read"));
+myLibrary.push(new Book("Atomic Habits", "James Clear", 320, "Unread"));
+
+renderLibrary();

@@ -8,7 +8,10 @@
 </head>
 <body>
     <div class="container">
-        <h1>My Library</h1>
+        <div class="header">
+            <h1>My Library</h1>
+            <button id="addNew">Add New Book</button>
+        </div>
         <dialog id="newBook">
             <form id="addNewBook">
                     <label>
@@ -31,12 +34,11 @@
                         </select>
                     </label>
                     <div class="formButtons">
-                        <button id="confirmBtn" value="default">Confirm</button>
+                        <button id="confirmBtn" value="default" type="submit">Confirm</button>
                         <button id="cancel" formmethod="dialog" type="button">Cancel</button>
                     </div>
             </form>
             </dialog>
-            <button id="addNew">Add New Book</button>
         <div id="bookCards">
 
         </div>
